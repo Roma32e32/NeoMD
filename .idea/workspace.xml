@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ecd789bc-5999-4782-8682-4895f6158f67" name="Changes" comment="uv">
-      <change beforePath="$PROJECT_DIR$/init_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/init_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/work_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/work_menu.py" afterDir="false" />
+    <list default="true" id="ecd789bc-5999-4782-8682-4895f6158f67" name="Changes" comment="src">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/init_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/work_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/work_menu.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +44,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.main.executor": "Run",
     "Python.main_window.executor": "Run",
@@ -112,11 +114,20 @@
       <option name="project" value="LOCAL" />
       <updated>1773998456454</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="src">
+      <option name="closed" value="true" />
+      <created>1773998776784</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1773998776784</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="uv" />
-    <option name="LAST_COMMIT_MESSAGE" value="uv" />
+    <MESSAGE value="src" />
+    <option name="LAST_COMMIT_MESSAGE" value="src" />
   </component>
 </project>
