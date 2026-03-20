@@ -1,6 +1,6 @@
 from PySide6.QtCore import *
 from PySide6.QtWidgets import *
-from init_menu import InitMenuView
+from src.init_menu import InitMenuView
 from work_menu import WorkMenu
 
 __all__ = ["MainWindow"]
