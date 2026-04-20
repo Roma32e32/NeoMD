@@ -1,10 +1,10 @@
 from PySide6.QtCore import QStringListModel, QObject, Signal,Slot
 from PySide6.QtWidgets import *
 
-__all__ = ["InitMenu"]
+__all__ = ["InitWindow"]
 
 
-class InitMenu(QWidget):
+class InitWindow(QWidget):
     def __init__(self):
         super().__init__()
 
@@ -36,7 +36,7 @@ class InitMenuPresenter(QObject):
     def __init__(self, recent_list: QStringListModel):
         super().__init__()
 
-        self.recent_list_file_path = r"E:\Roma\PythonProject\NeoMD\recent_dirs"
+        self.recent_list_file_path = r"userfiles/recent_dirs"
 
         self.recent_list = recent_list
 
