@@ -1,6 +1,7 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import *
 from windows.work_window_subwidgets.file_tree import *
+from work_window_subwidgets.md_editor import MDEditor
 
 __all__ = ["WorkWindow"]
 
@@ -24,9 +25,12 @@ class WorkWindow(QWidget):
         layout.addWidget(spliter)
         self.setLayout(layout)
 
-        self.file_tree.file_opened.connect(lambda a: self.tabs.addTab(QLabel(a), a.split('/')[-1]))
-        self.tabs.tabCloseRequested.connect(lambda a: self.tabs.removeTab(a))
+        self.file_tree.md_opened.connect(lambda a: self.tabs.addTab(MDEditor("MD"), a.split('/')[-1]))
+        self.tabs.tabCloseRequested.connect(self.on_tab_closes)
 
+    def on_tab_closes(self, index):
+        self.tabs.widget(index).deleteLater()
+        self.tabs.removeTab(index)
 
     def update_dir(self, dir_path: str):
         self.file_tree.update_dir(dir_path)

@@ -1,28 +1,29 @@
-from PySide6.QtCore import Signal
-from PySide6.QtWidgets import *
+from PySide6.QtCore import Qt, Signal, Slot
+from PySide6.QtWidgets import QTreeView, QFileSystemModel
 
-class FileTree(QWidget):
-    file_opened = Signal(str)
+__all__ = ["FileTree"]
+
+class FileTree(QTreeView):
+    md_opened = Signal(str)
+    graph_opened = Signal(str)
+    img_opened = Signal(str)
 
     def __init__(self):
         super().__init__()
 
-        main_layout = QVBoxLayout()
-
         self.file_system = QFileSystemModel()
-        self.file_tree_view = QTreeView()
-        self.file_tree_view.setModel(self.file_system)
+        self.setModel(self.file_system)
 
-        self.file_tree_view.hideColumn(1)
-        self.file_tree_view.doubleClicked.connect(self.__on_file_double_clicked)
+        self.hideColumn(1)
+        self.hideColumn(2)
+        self.hideColumn(3)
+        self.setHeaderHidden(True)
 
     def update_dir(self, path):
         path = path.replace('\n', '')
         self.file_system.setRootPath(path)
-        self.file_tree_view.setRootIndex(self.file_system.index(path))
+        self.setRootIndex(self.file_system.index(path))
 
-    def __on_file_double_clicked(self, index):
-        if self.file_system.isDir(index):
-            return
-        else:
-            self.file_opened.emit(self.file_system.filePath(index))
+    def mouseDoubleClickEvent(self, event):
+        self.md_opened.emit(self.file_system.filePath(self.indexAt(event.pos())))
+        super().mouseDoubleClickEvent(event)
