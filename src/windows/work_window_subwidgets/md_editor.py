@@ -4,4 +4,5 @@ __all__ = ["MDEditor"]
 
 class MDEditor(QLabel):
     def __del__(self):
-        print("__del__")
+        #print("__del__")
+        pass

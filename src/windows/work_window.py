@@ -15,6 +15,7 @@ class WorkWindow(QWidget):
         self.tabs = QTabWidget()
         self.tabs.setMovable(True)
         self.tabs.setTabsClosable(True)
+        self.tabs.setDocumentMode(True)
 
         self.file_tree = FileTree()
 
@@ -25,12 +26,15 @@ class WorkWindow(QWidget):
         layout.addWidget(spliter)
         self.setLayout(layout)
 
-        self.file_tree.md_opened.connect(lambda a: self.tabs.addTab(MDEditor("MD"), a.split('/')[-1]))
-        self.tabs.tabCloseRequested.connect(self.on_tab_closes)
+        self.file_tree.md_opened.connect(self.on_md_opened)
+        self.tabs.tabCloseRequested.connect(self.on_tab_closed)
 
-    def on_tab_closes(self, index):
+    def on_tab_closed(self, index):
         self.tabs.widget(index).deleteLater()
         self.tabs.removeTab(index)
+
+    def on_md_opened(self, path):
+        self.tabs.addTab(MDEditor(path), path.split('/')[-1])
 
     def update_dir(self, dir_path: str):
         self.file_tree.update_dir(dir_path)
