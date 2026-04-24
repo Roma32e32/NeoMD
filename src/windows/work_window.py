@@ -21,6 +21,7 @@ class WorkWindow(QWidget):
 
         spliter.addWidget(self.file_tree)
         spliter.addWidget(self.tabs)
+        spliter.setSizes([280, 1000])
 
         layout = QVBoxLayout()
         layout.addWidget(spliter)
@@ -30,11 +31,18 @@ class WorkWindow(QWidget):
         self.tabs.tabCloseRequested.connect(self.on_tab_closed)
 
     def on_tab_closed(self, index):
-        self.tabs.widget(index).deleteLater()
-        self.tabs.removeTab(index)
+        try:
+            self.tabs.widget(index).deleteLater()
+            self.tabs.removeTab(index)
+        except AttributeError:
+            pass
 
-    def on_md_opened(self, path):
-        self.tabs.addTab(MDEditor(path), path.split('/')[-1])
+    def on_md_opened(self, path, new):
+        if not new:
+            self.tabs.addTab(MDEditor(path), path.split('/')[-1])
+        else:
+            self.tabs.tabCloseRequested.emit(self.tabs.currentIndex())
+            self.tabs.addTab(MDEditor(path), path.split('/')[-1])
 
     def update_dir(self, dir_path: str):
         self.file_tree.update_dir(dir_path)

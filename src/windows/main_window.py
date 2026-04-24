@@ -13,7 +13,7 @@ class MainWindow(QMainWindow):
         self.work_menu = WorkWindow()
 
         self.setWindowTitle("NeoMD")
-        self.setGeometry(300, 300, 400, 200)
+        self.setGeometry(300, 300, 1280, 720)
 
         stacked_widget = QStackedWidget(self)
         self.setCentralWidget(stacked_widget)
