@@ -39,10 +39,10 @@ class WorkWindow(QWidget):
 
     def on_md_opened(self, path, new):
         if not new:
-            self.tabs.addTab(MDEditor(path), path.split('/')[-1])
+            self.tabs.addTab(MDEditor(path, self.on_md_opened), path.split('/')[-1])
         else:
             self.tabs.tabCloseRequested.emit(self.tabs.currentIndex())
-            self.tabs.addTab(MDEditor(path), path.split('/')[-1])
+            self.tabs.addTab(MDEditor(path, self.on_md_opened), path.split('/')[-1])
 
     def update_dir(self, dir_path: str):
         self.file_tree.update_dir(dir_path)

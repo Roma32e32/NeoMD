@@ -1,6 +1,7 @@
 from PySide6 import QtCore
 from PySide6.QtWidgets import QWidget, QStackedWidget, QVBoxLayout, QTextBrowser, QTextEdit, QHBoxLayout, QPushButton
 from markdown_it import MarkdownIt, presets
+import re
 
 md = MarkdownIt()
 md.enable('table')
@@ -8,9 +9,12 @@ md.options["breaks"] = True
 
 __all__ = ["MDEditor"]
 
+
 class MDEditor(QWidget):
-    def __init__(self, path):
+    def __init__(self, path, deleg):
         super().__init__()
+
+        self.open_new = deleg
 
         self.path = path
 
@@ -22,6 +26,10 @@ class MDEditor(QWidget):
         self.setLayout(self.layout)
 
         self.text_browser = QTextBrowser()
+        self.text_browser.setOpenExternalLinks(False)
+        self.text_browser.setOpenLinks(False)
+        self.text_browser.anchorClicked.connect(self.on_link_clicked)
+
         self.on_viewer_selected()
         self.stack.addWidget(self.text_browser)
 
@@ -60,7 +68,14 @@ class MDEditor(QWidget):
     def on_viewer_selected(self):
         self.stack.setCurrentIndex(0)
         html = md.render(self.text)
+
+        pattern = r'\[\[(.*?)\]\]'
+        html = re.sub(pattern, r'<a href="\1">\1</a>', html)
         self.text_browser.setHtml(html)
+
+    def on_link_clicked(self, urls):
+        self.open_new(urls.url(), True)
+        print(urls)
 
     def __del__(self):
         pass
