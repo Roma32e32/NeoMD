@@ -1,5 +1,6 @@
 from PySide6.QtCore import QStringListModel, QObject, Signal,Slot
 from PySide6.QtWidgets import *
+from pathlib import Path
 
 __all__ = ["InitWindow"]
 
@@ -27,16 +28,16 @@ class InitWindow(QWidget):
 
         self.dir_dialog_button.clicked.connect(self.presenter.dir_select_dialog)
         self.dir_selected = self.presenter.dir_selected
-        self.recent_list.doubleClicked.connect(lambda i: self.dir_selected.emit(self.presenter.recent_list.stringList()[i.row()]))
+        self.recent_list.doubleClicked.connect(lambda i: self.dir_selected.emit(Path(self.presenter.recent_list.stringList()[i.row()].replace('\n', ''))))
 
 
 class InitMenuPresenter(QObject):
-    dir_selected = Signal(str)
+    dir_selected = Signal(Path)
 
     def __init__(self, recent_list: QStringListModel):
         super().__init__()
 
-        self.recent_list_file_path = r"userfiles/recent_dirs"
+        self.recent_list_file_path = Path("./userfiles/recent_dirs")
 
         self.recent_list = recent_list
 

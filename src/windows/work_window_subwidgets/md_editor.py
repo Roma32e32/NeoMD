@@ -1,7 +1,8 @@
 from PySide6 import QtCore
 from PySide6.QtWidgets import QWidget, QStackedWidget, QVBoxLayout, QTextBrowser, QTextEdit, QHBoxLayout, QPushButton
-from markdown_it import MarkdownIt, presets
-import re
+from markdown_it import MarkdownIt
+from re import sub
+from pathlib import Path
 
 md = MarkdownIt()
 md.enable('table')
@@ -11,12 +12,13 @@ __all__ = ["MDEditor"]
 
 
 class MDEditor(QWidget):
-    def __init__(self, path, deleg):
+    def __init__(self, base_path, path, deleg):
         super().__init__()
 
         self.open_new = deleg
 
         self.path = path
+        self.base_path = base_path
 
         self.stack = QStackedWidget()
         self.layout = QVBoxLayout()
@@ -70,12 +72,12 @@ class MDEditor(QWidget):
         html = md.render(self.text)
 
         pattern = r'\[\[(.*?)\]\]'
-        html = re.sub(pattern, r'<a href="\1">\1</a>', html)
+        html = sub(pattern, r'<a href="\1">\1</a>', html)
         self.text_browser.setHtml(html)
 
     def on_link_clicked(self, urls):
-        self.open_new(urls.url(), True)
-        print(urls)
+        self.open_new(str(Path(f"{(str(self.base_path).replace('\n', ''))}\\{urls.url()}")), True)
+
 
     def __del__(self):
         pass

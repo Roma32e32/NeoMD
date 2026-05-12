@@ -1,8 +1,8 @@
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import QTreeView, QFileSystemModel, QAbstractItemView
-from work_window_subwidgets.context_menu import ContextMenu
-import shutil
-import os
+from windows.work_window_subwidgets.context_menu import ContextMenu
+from shutil import move, Error
+from pathlib import Path
 
 __all__ = ["FileTree"]
 
@@ -13,9 +13,9 @@ class FileTree(QTreeView):
 
 
     #true - open in current page; false - open in new page
-    md_opened = Signal(str, bool)
+    md_opened = Signal(Path, bool)
 
-    graph_opened = Signal(str)
+    graph_opened = Signal(Path)
 
     #img_opened = Signal(str, bool)
 
@@ -25,7 +25,7 @@ class FileTree(QTreeView):
         self.file_system = FileTree.FileSystem()
         self.setModel(self.file_system)
 
-        self.copied_path = ""
+        self.copied_path = Path("")
 
         self.hideColumn(1)
         self.hideColumn(2)
@@ -42,9 +42,8 @@ class FileTree(QTreeView):
         self.customContextMenuRequested.connect(self.show_context_menu)
 
     def update_dir(self, path):
-        path = path.replace('\n', '')
-        self.file_system.setRootPath(path)
-        self.setRootIndex(self.file_system.index(path))
+        self.file_system.setRootPath(str(path.resolve()))
+        self.setRootIndex(self.file_system.index(str(path.resolve())))
 
     def mousePressEvent(self, event):
         #self.md_opened.emit(self.file_system.filePath(self.indexAt(event.pos())), True)
@@ -84,8 +83,8 @@ class FileTree(QTreeView):
             dst = self.file_system.filePath(index)
 
             try:
-                shutil.move(src, dst)
-            except shutil.Error as e:
+                move(src, dst)
+            except Error as e:
                 pass
 
         event.acceptProposedAction()

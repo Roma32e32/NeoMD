@@ -1,8 +1,8 @@
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import QTreeView, QFileSystemModel, QWidget, QMenu
 from PySide6.QtGui import QAction
-import os
-import shutil
+from os import mkdir, path, rename, remove
+from shutil import copytree, copy2, rmtree
 from pathlib import Path
 
 __all__ = ['ContextMenu']
@@ -17,16 +17,20 @@ class ContextMenu(QMenu):
 
         self.is_file = is_file
 
+        open_graph_action= QAction("Граф", self)
+        self.addAction(open_graph_action)
+        open_graph_action.triggered.connect(self.on_graph_open)
+        self.addSeparator()
+
         if self.is_file:
             open_action = QAction("Открыть", self)
             open_new_action = QAction("Открыть в новой вкладке", self)
-            open_graph_action = QAction("Граф", self)
+
 
             self.addAction(open_action)
             self.addAction(open_new_action)
-            self.addAction(open_graph_action)
 
-            open_graph_action.triggered.connect(self.on_graph_open)
+
             open_action.triggered.connect(self.on_open)
             open_new_action.triggered.connect(self.on_new_open)
 
@@ -75,7 +79,7 @@ class ContextMenu(QMenu):
     def on_new_dir(self, n=False):
         path = f'{self.file_path}//Новая папка{'' if n is False else f' ({n})'}'
         try:
-            os.mkdir(path)
+            mkdir(path)
         except FileExistsError:
             self.on_new_dir(1 if n is False else n+1)
         else:
@@ -88,7 +92,7 @@ class ContextMenu(QMenu):
         self.parent.md_opened.emit(self.file_path, False)
 
     def on_graph_open(self):
-        self.parent.graph_opened.emit(self.file_path)
+        self.parent.graph_opened.emit(Path(self.file_path))
 
     def on_copy(self):
         self.parent.copied_path = self.file_path
@@ -98,17 +102,17 @@ class ContextMenu(QMenu):
 
         try:
             if is_src_file:
-                shutil.copy2(self.parent.copied_path, self.file_path)
+                copy2(self.parent.copied_path, self.file_path)
             else:
-                shutil.copytree(self.parent.copied_path, os.path.join(self.file_path, os.path.basename(self.parent.copied_path)), dirs_exist_ok=True)
+                copytree(self.parent.copied_path, path.join(self.file_path, os.path.basename(self.parent.copied_path)), dirs_exist_ok=True)
         except BaseException:
             pass
 
     def on_delete(self):
         if self.is_file:
-            os.remove(self.file_path)
+            remove(self.file_path)
         else:
-            shutil.rmtree(self.file_path)
+            rmtree(self.file_path)
 
     def on_rename(self):
-        print(self.parent.edit(self.index))
+        self.parent.edit(self.index)
