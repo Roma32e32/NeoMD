@@ -36,9 +36,8 @@ def parse_graph(base_path, path=None):
             names = [t for t in names if t.exists()]
             [graph.add_edge(name1, name) for name in names]
 
-    path = Path(path)
     if path is not None:
-        return graph.subgraph(nx.node_connected_component(graph.to_undirected(), path))
+        return graph.subgraph(nx.node_connected_component(graph.to_undirected(), Path(path)))
     else:
         return graph
 

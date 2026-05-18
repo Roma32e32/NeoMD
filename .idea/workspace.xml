@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ecd789bc-5999-4782-8682-4895f6158f67" name="Changes" comment="Graph">
+    <list default="true" id="ecd789bc-5999-4782-8682-4895f6158f67" name="Changes" comment="fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/windows/init_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/windows/init_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/windows/work_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/windows/work_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/windows/work_window_subwidgets/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/windows/work_window_subwidgets/graph.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -216,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778605454752</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fixes">
+      <option name="closed" value="true" />
+      <created>1779131076978</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1779131076978</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +251,8 @@
     <MESSAGE value="Редактор Markdown + открытие в новой вкладке" />
     <MESSAGE value="Завершено контекстное меню и др" />
     <MESSAGE value="Graph" />
-    <option name="LAST_COMMIT_MESSAGE" value="Graph" />
+    <MESSAGE value="fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
