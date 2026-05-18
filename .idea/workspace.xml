@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ecd789bc-5999-4782-8682-4895f6158f67" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/windows/work_window_subwidgets/graph.py" afterDir="false" />
+    <list default="true" id="ecd789bc-5999-4782-8682-4895f6158f67" name="Changes" comment="Graph">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/windows/init_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/windows/init_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/windows/work_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/windows/work_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/windows/work_window_subwidgets/context_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/windows/work_window_subwidgets/context_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/windows/work_window_subwidgets/file_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/windows/work_window_subwidgets/file_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/windows/work_window_subwidgets/md_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/windows/work_window_subwidgets/md_editor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/windows/work_window_subwidgets/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/windows/work_window_subwidgets/graph.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778170943126</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Graph">
+      <option name="closed" value="true" />
+      <created>1778605454752</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1778605454752</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,7 +244,8 @@
     <MESSAGE value="Тёмная тема + прототип контекстного меню" />
     <MESSAGE value="Редактор Markdown + открытие в новой вкладке" />
     <MESSAGE value="Завершено контекстное меню и др" />
-    <option name="LAST_COMMIT_MESSAGE" value="Завершено контекстное меню и др" />
+    <MESSAGE value="Graph" />
+    <option name="LAST_COMMIT_MESSAGE" value="Graph" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

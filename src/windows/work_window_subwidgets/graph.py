@@ -11,12 +11,12 @@ from pathlib import Path
 
 __all__ = ['Graph']
 
-def parse_graph(base_path, path):
+def parse_graph(base_path, path=None):
     base_path = Path(base_path)
-    path = Path(path)
+
 
     def get_links(_path):
-        with open(_path, 'r') as f:
+        with open(_path, 'r', encoding='utf-8') as f:
             text = f.read()
         pattern = r'\[\[(.*?)\]\]'
         raw = re.findall(pattern, text)
@@ -33,17 +33,20 @@ def parse_graph(base_path, path):
         if path_.is_file():
             name1 = path_.resolve()
             names = get_links(path_.resolve())
+            names = [t for t in names if t.exists()]
             [graph.add_edge(name1, name) for name in names]
 
-    if path.is_file():
+    path = Path(path)
+    if path is not None:
         return graph.subgraph(nx.node_connected_component(graph.to_undirected(), path))
     else:
         return graph
 
 class NodeItem(QGraphicsEllipseItem):
     """Узел графа (круг + текстовая метка)."""
-    def __init__(self, path, name, x, y,  radius=14):
+    def __init__(self, path, name, x, y, parent,  radius=14):
         super().__init__(-radius, -radius, 2 * radius, 2 * radius)
+        self.parent = parent
         self.path = path
         self.name = name
         self.radius = radius
@@ -65,6 +68,11 @@ class NodeItem(QGraphicsEllipseItem):
         self.label.setPos(-rect.width() / 2, -rect.height() / 2 - radius - 5)
         self.label.setDefaultTextColor(Qt.white)
         self.label.setZValue(2.1)
+
+
+    def mouseDoubleClickEvent(self, event):
+        super().mouseDoubleClickEvent(event)
+        self.parent.ww.on_md_opened(str(self.path), False)
 
 
 class Edge:
@@ -125,11 +133,12 @@ class Edge:
 
 class Graph(QGraphicsView):
     """Интерактивное представление ориентированного графа с физической симуляцией."""
-    def __init__(self, base_path, path, parent=None):
+    def __init__(self, base_path, path, ww):
         self.base_path = base_path
+        self.ww = ww
         self.path = path
 
-        super().__init__(parent)
+        super().__init__()
         self.scene = QGraphicsScene(self)
         self.setScene(self.scene)
         self.setRenderHint(QPainter.Antialiasing)
@@ -165,7 +174,7 @@ class Graph(QGraphicsView):
             x = random.uniform(-600, 600)
             y = random.uniform(-400, 400)
             name = data.get('name')
-            node = NodeItem(n, name, x, y, radius=14)
+            node = NodeItem(n, name, x, y, self, radius=14)
             self.scene.addItem(node)
             self.node_map[n] = node
             self.nodes.append(node)

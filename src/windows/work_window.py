@@ -53,9 +53,9 @@ class WorkWindow(QWidget):
 
     def on_graph_opened(self, path):
         if path.is_file():
-            self.tabs.addTab(Graph(self.path, path), f"Локальный граф {path}")
+            self.tabs.addTab(Graph(self.path, path, self), f"Локальный граф {path}")
         else:
-            self.tabs.addTab(Graph(self.path, path), "Граф")
+            self.tabs.addTab(Graph(self.path, None, self), "Граф")
 
     def update_dir(self, dir_path: Path):
         self.file_tree.update_dir(dir_path)

@@ -11,7 +11,7 @@ class InitWindow(QWidget):
 
         recent_list_model = QStringListModel()
 
-        self.presenter = InitMenuPresenter(recent_list_model)
+        self.presenter = InitPresenter(recent_list_model)
 
         layout = QVBoxLayout()
         self.setLayout(layout)
@@ -31,7 +31,7 @@ class InitWindow(QWidget):
         self.recent_list.doubleClicked.connect(lambda i: self.dir_selected.emit(Path(self.presenter.recent_list.stringList()[i.row()].replace('\n', ''))))
 
 
-class InitMenuPresenter(QObject):
+class InitPresenter(QObject):
     dir_selected = Signal(Path)
 
     def __init__(self, recent_list: QStringListModel):
